@@ -1,0 +1,268 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Calendar</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <mat-tab-group>
+        <mat-tab label="Book">
+            <div class="container my-3">
+                <div class="m-b-10">
+                    <mat-card class="my-1 mat-elevation-z2">
+                        <div class="months">
+      <span (click)="changeMonth(0)" class="chev">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </span>
+                            <b>{{currentDate.format('MMMM')}} {{currentDate.format('YYYY')}}</b>
+
+                            <span (click)="changeMonth(1)" class="chev">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </span>
+                        </div>
+                        <hr>
+
+                        <div class="grid">
+                            <div class="grid-column"><b>S</b></div>
+                            <div class="grid-column"><b>M</b></div>
+                            <div class="grid-column"><b>T</b></div>
+                            <div class="grid-column"><b>W</b></div>
+                            <div class="grid-column"><b>T</b></div>
+                            <div class="grid-column"><b>F</b></div>
+                            <div class="grid-column"><b>S</b></div>
+                        </div>
+                        <div class="grid">
+                            <div *ngFor="let day of months" [class]="getDayCss(day)" class="grid-column">
+                                <span *ngIf="day === 0; else valid"></span>
+                                <ng-template #valid>
+                                    <span *ngIf="isPassed(day); else future" class="passed">{{day.format('DD')}}</span>
+                                    <ng-template #future>
+                                        <span (click)="selectDate(day)" class="future">{{day.format('DD')}}</span>
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+
+                <form [formGroup]=scheduleForm>
+
+                    <mat-card class="my-1">
+                        <h5 class="m-b-8">Add New Slot</h5>
+                        <div>
+                            <mat-form-field appearance="outline" class="w-full">
+                                <mat-label>Selected Date</mat-label>
+                                <input [value]="util.getHumanShortDate(selectedDate)" aria-label="From" matInput
+                                       placeholder="Selected Date" readonly>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="ngx-timepicker-field-example my-1">
+                                    <mat-form-field appearance="outline" class="w-full">
+                                        <mat-label>Choose From</mat-label>
+                                        <input [ngxTimepicker]="time" aria-label="From" formControlName="from"
+                                               matInput placeholder="Choose From Time" [format]=24 readonly>
+                                        <ngx-material-timepicker [theme]="purpleTheme" #time></ngx-material-timepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col">
+
+                                <div class="ngx-timepicker-field-example my-1">
+                                    <mat-form-field appearance="outline" class="w-full">
+                                        <mat-label>Choose Till</mat-label>
+                                        <input [ngxTimepicker]="till" aria-label="Till" formControlName="till"
+                                               matInput placeholder="Choose Till Time" [format]=24 readonly>
+                                        <ngx-material-timepicker [theme]="purpleTheme" #till></ngx-material-timepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="ngx-timepicker-field-example my-1">
+
+                                    <mat-form-field *ngIf="session.getUser().city.length > 0; else noArea" appearance="fill">
+                                        <mat-label>Choose Area</mat-label>
+                                        <mat-select  formControlName="city">
+                                            <mat-option  *ngFor="let city of session.getUser().city" [value]="city">
+                                                {{city.name | uppercase}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <ng-template #noArea>
+                                        <h5>You need to add area to create slot<sup>*</sup></h5>
+
+                                    </ng-template>
+                                </div>
+                            </div>
+
+<!--                            <div class="col">-->
+
+<!--                                <div class="ngx-timepicker-field-example my-1">-->
+<!--                                    <mat-form-field appearance="outline" class="w-full">-->
+<!--                                        <mat-label>City</mat-label>-->
+<!--                                        <input [(ngModel)]="post"  formControlName="city" matInput placeholder="City"  readonly>-->
+<!--                                    </mat-form-field>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+
+
+
+                    </mat-card>
+
+                    <div>
+                        <button (click)="markAvailable()" [disabled]="!scheduleForm.valid" class="btn-avail my-3"
+                                mat-raised-button>Mark Available
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Add Area">
+            <div class="container my-3">
+                <h3 class="my-3">
+                    <h3>Add new area</h3>
+                </h3>
+         <mat-card>
+             <div>
+                 <mat-form-field appearance="outline">
+                     <mat-label>Area name</mat-label>
+                     <input type="text" placeholder="Area name" matInput required #area>
+                 </mat-form-field>
+             </div>
+             <div class="row">
+                 <div class="col">
+                     <mat-form-field appearance="outline">
+                         <mat-label>Postcode</mat-label>
+                         <input (input)="onSearchChange($event.target.value)" type="text" minlength="5" maxlength="5" placeholder="Postcode" matInput>
+                     </mat-form-field>
+                 </div>
+                 <div class="col">
+                     <mat-form-field appearance="outline">
+                         <mat-label>City</mat-label>
+                         <input required  [(ngModel)]="post" readonly type="tel" placeholder="City" matInput>
+                     </mat-form-field>
+                 </div>
+             </div>
+             <div *ngIf="city.length > 0" class="mb-3 row">
+                    <span (click)="removeCity(town)" class="city-chip" *ngFor="let town of city">
+                 {{town}} <span><svg style="width:16px;height:16px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
+                    </svg></span>
+             </span>
+             </div>
+             <div>
+                 <button mat-flat-button color="primary" [disabled]="!post"  (click)="AddCity(post)">Add City</button>
+             </div>
+         </mat-card>
+
+                <div>
+                    <button class="w-full mt-2 save-area" mat-flat-button (click)="saveArea(area.value)" [disabled]="(!area.value) || (city.length === 0)">Save Area</button>
+                </div>
+                <hr>
+                <div  class="my-3">
+                    <h3>{{ session.getUser().city.length > 0 ? 'Area Information' : 'No area added'}}  </h3>
+
+                    <div class="my-5 text-center" *ngIf="session.getUser().city.length === 0">
+                        <svg style="width:64px;height:64px;color: grey" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M3 3H17C18.11 3 19 3.9 19 5V12.08C17.45 11.82 15.92 12.18 14.68 13H11V17H12.08C11.97 17.68 11.97 18.35 12.08 19H3C1.9 19 1 18.11 1 17V5C1 3.9 1.9 3 3 3M3 7V11H9V7H3M11 7V11H17V7H11M3 13V17H9V13H3M18.5 14C16 14 14 16 14 18.5S16 23 18.5 23 23 21 23 18.5 21 14 18.5 14M18.5 21.5C16.84 21.5 15.5 20.16 15.5 18.5C15.5 17.94 15.65 17.42 15.92 17L20 21.08C19.58 21.35 19.06 21.5 18.5 21.5M21.08 20L17 15.92C17.42 15.65 17.94 15.5 18.5 15.5C20.16 15.5 21.5 16.84 21.5 18.5C21.5 19.06 21.35 19.58 21.08 20Z" />
+                        </svg>
+                    </div>
+
+                    <div *ngIf="session.getUser().city.length > 0">
+
+                        <mat-accordion *ngFor="let area of session.getUser().city">
+                            <mat-expansion-panel class="mt-2" *ngIf="area.data">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                       <span class="fs-16"> {{area.name | uppercase}}</span>
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="fs-16">{{area.data.toString()}}</div>
+                                <div class="t-right">
+                                    <button
+                                            class="delete-area"
+                                            (click)="deleteArea(area)"
+                                            mat-flat-button>
+                                        Delete Area
+                                    </button>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+<!--                        <div *ngFor="let area of session.getUser().city">-->
+<!--                            <div>{{area.name}}</div>-->
+<!--                            <span >{{area.data}}</span>-->
+<!--                        </div>-->
+                    </div>
+
+                </div>
+
+            </div>
+        </mat-tab>
+        <mat-tab label="Details">
+            <div *ngIf="filteredSlots.length === 0">
+                <mat-card class="m-10">
+                    <h5>No available slots for this date</h5>
+                </mat-card>
+            </div>
+
+
+            <div *ngIf="filteredSlots.length > 0" class="my-3">
+
+                <mat-card *ngFor=" let slot of filteredSlots" class="justify-content-between m-10"
+                          style="display: flex!important">
+
+                    <div>
+                        <div class="container-content">
+                            <div class="row">
+                                <span class="col-2"><ion-icon  class="m-r-8 fs-24" name="today-outline"></ion-icon></span>
+                                <span class="col-8 align-self-center">{{util.getHumanShortDate(slot.date)}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-2"><ion-icon class="m-r-8 fs-24" name="time-outline"></ion-icon></span>
+                                <span class="col-8">{{slot.from}} - {{slot.till}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-2"><ion-icon class="m-r-8 fs-24" name="navigate-circle-outline"></ion-icon></span>
+                                <span class="col-8 text-uppercase">{{slot.area}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="align-self-center">
+                          <button (click)="cancelSlot(slot)" class="btn-cancel" mat-flat-button>Cancel</button>
+                    </span>
+
+                </mat-card>
+
+
+                <!--                <span (click)="openTimeBottomSheet()" style="background-color: #4caf50;" class="slot-chip col-5">Add new Slot +</span>-->
+
+                <!--                <mat-card class="my-3 ">-->
+                <!--                    <div>-->
+                <!--                        <div>{{util.getHumanShortDate(slot.date)}} <b><ion-icon (click)="cancelSlot(slot)" class="float-right" name="close-outline"></ion-icon></b></div>-->
+                <!--                        <div><ion-icon name="calendar-clear-outline"></ion-icon> Available : <span style="color: #4caf50">Yes</span></div>-->
+                <!--                        <div><ion-icon name="time-outline"></ion-icon> From : {{slot.from}}</div>-->
+                <!--                        <div><ion-icon name="timer-outline"></ion-icon> Till : {{slot.till}}</div>-->
+                <!--                    </div>-->
+                <!--                </mat-card>-->
+
+
+            </div>
+
+
+        </mat-tab>
+    </mat-tab-group>
+
+
+</ion-content>

@@ -1,0 +1,103 @@
+.user-btn{
+  background-color: #88d62c;
+  color: white;
+  font-size: 12px;
+  border-radius: 20px;
+  margin: 5px;
+}
+.btn-container{
+  text-align: center;
+}
+
+.call{
+  text-align: center;
+  font-size: 16px;
+  margin: 20px 0;
+
+}
+
+hr{
+  background-color: #dbdbdb;
+}
+.mat-expansion-panel-header.mat-expanded {
+  min-height: 100px!important;
+  height: auto!important;
+}
+
+.days{
+  border: 1px solid;
+  padding: 10px;
+  color: #8a2be2;
+  margin-right: 10px;
+}
+
+.days-selected{
+  border: 1px solid;
+  padding: 10px;
+  color: white;
+  background: #8a2be2;
+  margin-right: 10px;
+}
+
+.days-container{
+  overflow: scroll;
+  width: 800px;
+
+}
+
+.no-order{
+  text-align: center;
+  color: #7d7d7d;
+}
+
+.empty-icon{
+  color: #7d7d7d;
+  text-align: center;
+  font-size: 48px;
+}
+
+.mat-card{
+  border-radius: 12px;
+}
+
+.completed-card{
+  border: 1px solid #8a2be2;
+}
+
+.cancel-card{
+  border: 1px solid orangered;
+}
+
+
+.icon{
+  font-size: 16px;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.o-detail-title{
+  color: #111111;
+  font-size: 16px;
+  margin-top: 2px;
+
+}
+
+.details-container{
+  //display: flex;
+  flex-direction: row;     /* make main axis horizontal (default setting) */
+  justify-content: space-between; /* center items horizontally, in this case */
+  align-items: center;     /* center items vertically, in this case */
+
+  div{
+    font-size: 18px;
+    margin-top: 5px;
+  }
+}
+
+.icon{
+  height: 28px;
+  width: 28px;
+  color: #8a2be2;
+  margin-right: 5px;
+}

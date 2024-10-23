@@ -1,0 +1,191 @@
+    <ion-header>
+    <ion-toolbar>
+        <ion-title>Home</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="allOrders" class="container">
+
+        <mat-tab-group>
+
+            <mat-tab label="All orders">
+
+                <div class="m5 my-3">
+                    <mat-card *ngFor="let order of orders" style="padding: 10px;margin: 10px 0" class="mat-elevation-z2"
+                              (click)="openDetailBottomSheet(order)">
+                        <div class="details-container">
+                            <div class="m-t-10">#<i>{{order._id}}</i></div>
+
+                            <div class="m-t-10">
+                             <span>   <svg class="icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z" />
+                                </svg>
+                             </span>
+                            <span>
+                                 {{getHumanShortDate(order.date)}}
+                            </span>
+                            </div>
+                            <div>
+                            <span>
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M15.3 16.2L14 17L11 11.8V7H12.5V11.4L15.3 16.2Z" />
+                                </svg>
+                            </span>
+                                <span>{{order.time}}</span>
+                            </div>
+                            <div >
+                            <span>
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                                </svg>
+                            </span>
+                                <span>{{order.name}}</span>
+                            </div>
+
+                        </div>
+                        
+
+                    </mat-card>
+
+                    <div class="m5" *ngIf="orders.length === 0">
+                        <mat-card>
+                            <div class="empty-icon">
+                                <ion-icon name="folder-open-outline"></ion-icon>
+                            </div>
+                            <h5 class="no-order">No Orders assigned for this day</h5>
+                        </mat-card>
+                    </div>
+
+                </div>
+
+            </mat-tab>
+
+            <mat-tab label="Date based orders">
+                <ion-slides [options]="slideOpts" style="margin-top: 25px">
+                    <ion-slide (click)="getOrdersByDate(day, session.getUser().id)" *ngFor="let day of days"
+                               [class]="getDaysCss(day)">
+                        <div>
+                            <div>{{day.format('ddd')}}</div>
+                            <div class="small">{{day.format('DD-MM')}}</div>
+                        </div>
+
+                    </ion-slide>
+
+                </ion-slides>
+
+
+                <div style="margin-top: 20px">
+
+                    <div *ngFor="let order of allOrders">
+                        <mat-card *ngIf="order.status === 'PAYMENT_CONFIRMED' || order.status === 'COMPLETED' " [style.background]="getCss(order.status)"  class="my-3 row m-l-2 m-r-2" (click)="openDetailBottomSheet(order)">
+                            <div >
+                                <div class="o-detail-title">
+                    <span style="width:24px;height:24px">
+                        <ion-icon  name="information-circle-outline"></ion-icon>
+                  </span>
+                                    <span>{{order._id}}</span>
+                                </div>
+
+                                <div class="o-detail-title">
+                    <span style="width:24px;height:24px">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </span>
+                                    <span>{{order.name}}</span>
+                                </div>
+
+
+                                <div class="o-detail-title">
+                    <span style="width:24px;height:24px">
+                        <ion-icon name="time-outline"></ion-icon>
+                    </span>
+                                    <span>{{order.time}}</span>
+                                </div>
+
+
+                                <div class="o-detail-title">
+                    <span style="width:24px;height:24px">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                                    <span>{{order.address}}</span>
+                                </div>
+
+
+                                <div class="o-detail-title">
+                    <span style="width:24px;height:24px">
+                        <ion-icon name="call-outline"></ion-icon>
+                    </span>
+                                    <span>{{order.phone}}</span>
+                                </div>
+
+
+
+                                <div class="o-detail-title">
+                    <span style="width:24px;height:24px">
+                        <ion-icon name="hardware-chip-outline"></ion-icon>
+                    </span>
+                                    <span [style.color]="getStatusColor(order.status)">{{getStatus(order.status)}}</span>
+                                </div>
+
+                            </div>
+                        </mat-card>
+                    </div>
+                    <!--            <mat-accordion *ngFor="let order of allOrders">-->
+                    <!--                <mat-expansion-panel [class]="getCss(order.status)" style="margin-top: 10px!important">-->
+
+                    <!--                    <mat-expansion-panel-header [collapsedHeight]="'auto'" style="padding: 10px">-->
+                    <!--                        <mat-panel-title>-->
+                    <!--                        <span class="expansion-title">-->
+                    <!--                            #{{order._id}}-->
+                    <!--                            <br>-->
+                    <!--                            <br>-->
+                    <!--                      <span class="my-2">{{order.address}}</span>-->
+                    <!--                        </span>-->
+                    <!--                        </mat-panel-title>-->
+                    <!--                        <mat-panel-title class="expansion-title">-->
+                    <!--               <span>-->
+                    <!--                {{order.time}}-->
+                    <!--               </span>-->
+                    <!--                        </mat-panel-title>-->
+
+                    <!--                    </mat-expansion-panel-header>-->
+                    <!--                    <hr>-->
+                    <!--                    <div class="call">-->
+                    <!--                        <ion-icon name="call"></ion-icon>-->
+                    <!--                        &lt;!&ndash;                {{order.mobile}}&ndash;&gt;-->
+                    <!--                        <a href="tel:{{order.phone}}"-->
+                    <!--                           style="color: black;text-decoration: none;margin-left: 3px">{{order.phone ? order.phone : 'Contact not added'}}</a>-->
+                    <!--                    </div>-->
+
+                    <!--                    <div class="btn-container">-->
+                    <!--                        <button (click)="openDetailBottomSheet(order)" class="user-btn" mat-flat-button>Details</button>-->
+                    <!--                        <button (click)="presentAlertConfirm(order._id)" *ngIf="!(order.status === 'cancel' ||order.status === 'completed')" class="user-btn"-->
+                    <!--                                mat-flat-button>Cancel-->
+                    <!--                        </button>-->
+                    <!--                        <button *ngIf="!(order.status === 'cancel' || order.status === 'completed')" [routerLink]="'/completion/' + order._id" class="user-btn"-->
+                    <!--                                mat-flat-button>Complete-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
+
+
+                    <!--                </mat-expansion-panel>-->
+                    <!--            </mat-accordion>-->
+
+                </div>
+
+                <div class="m5" *ngIf="allOrders.length === 0">
+                    <mat-card>
+                        <div class="empty-icon">
+                            <ion-icon name="folder-open-outline"></ion-icon>
+                        </div>
+                        <h5 class="no-order">No Orders assigned for this day</h5>
+                    </mat-card>
+                </div>
+
+            </mat-tab>
+
+        </mat-tab-group>
+
+
+    </div>
+</ion-content>

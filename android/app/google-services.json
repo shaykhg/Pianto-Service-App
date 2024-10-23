@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1003262490109",
+    "project_id": "pianto-oy",
+    "storage_bucket": "pianto-oy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003262490109:android:863f8f9158ab5d65189594",
+        "android_client_info": {
+          "package_name": "io.pianto.service"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003262490109-epvjrnuuviti86hgj5gcbe83j9poq5sd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEwYQCECwam1I_WVizadU3sOtdF95qHoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003262490109-epvjrnuuviti86hgj5gcbe83j9poq5sd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1003262490109-5u27enprh2j6q92i6puoki1m74mvivfj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.pianto.service"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

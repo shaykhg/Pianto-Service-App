@@ -1,0 +1,46 @@
+
+<div class="container">
+
+  <div>
+    <div class="o-detail-title" style="margin-bottom: 15px">
+      <span>#{{reviewData.order}}</span>
+
+    </div>
+      <div class="d-flex justify-content-between">
+
+          <span>
+          <ion-icon name="calendar-outline"></ion-icon>
+            {{util.getHumanShortDate(reviewData.date)}}
+          </span>
+          <span>
+          <ion-icon name="time-outline"></ion-icon>
+           {{util.getTime(reviewData.date)}}
+          </span>
+      </div>
+
+
+    <div class="o-detail-info">
+      <span>{{reviewData.name}}</span>
+      <span>
+          <ion-icon name="star" *ngFor="let i of reviewArray(reviewData.rating).fill(1)"></ion-icon>
+
+        </span>
+    </div>
+  </div>
+
+  <hr>
+
+  <p style="color: #4d4d4d">
+    {{reviewData.comment}}</p>
+
+<!--  <div >-->
+<!--    <div class="o-detail-title"><span>Punctuality</span>-->
+<!--      <span>-->
+<!--          <ion-icon name="star"></ion-icon>-->
+<!--          <ion-icon name="star"></ion-icon>-->
+<!--          <ion-icon name="star"></ion-icon>-->
+<!--        </span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+</div>

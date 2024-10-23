@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Personal Info</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="container">
+
+  <mat-card *ngIf="session.getUser().id" class="edit-info mat-elevation-z3">
+    <form [formGroup] = profileForm >
+
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input minlength="2" formControlName="firstName" matInput type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input formControlName="lastName" matInput type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input style="background: #e7e7e7" readonly formControlName="email" matInput type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Mobile</mat-label>
+        <input minlength="10" formControlName="telephone" matInput type="text">
+        <mat-error>Please enter a valid 10 digit mobile number</mat-error>
+      </mat-form-field>
+
+
+<!--      Add multiple cities not required in Pianto v2-->
+
+
+<!--        <mat-form-field >-->
+<!--          <mat-label>Add postcode to add city</mat-label>-->
+<!--            <input matInput  id="input-post"-->
+<!--                   #postcode maxlength="5"  (input)="onSearchChange($event.target.value)"   placeholder="postcode" type="text">-->
+<!--        </mat-form-field>-->
+
+<!--      <mat-form-field >-->
+<!--            <mat-label >City</mat-label>-->
+<!--            <input matInput  formControlName="newCiy" id="input-city"-->
+<!--                   style="cursor: not-allowed"  readonly  [(ngModel)]="post"   placeholder="City" type="text">-->
+<!--      </mat-form-field>-->
+<!--      <div *ngIf="city.length > 0" class="grid-chip">-->
+<!--        <span class="chip" *ngFor="let loc of city">-->
+<!--        <span *ngIf="loc.name">-->
+<!--          {{loc.name}}-->
+<!--          <span (click)="removeCity(loc)" style="margin-left: 5px">-->
+<!--            <ion-icon name="close-outline"></ion-icon>-->
+<!--          </span>-->
+<!--        </span>-->
+<!--      </span>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <button mat-flat-button class="save" [disabled]="!postCodeIsValid" (click)="addCity(post)">Add City</button>-->
+<!--      </div>-->
+
+    </form>
+  </mat-card>
+
+  <button class="save-btn" mat-button (click)="updateUser()">Save Profile</button>
+
+</div>
+</ion-content>

@@ -1,0 +1,52 @@
+.p-details{
+  border: 1px solid #c4c4c4;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.p-detail-title{
+  color: #7d7d7d;
+  font-size: 13px;
+}
+
+.p-detail-info{
+  color: #0d0d0d;
+  font-size: 16px;
+}
+.o-detail-title{
+  color: #7d7d7d;
+  font-size: 18px;
+
+}
+
+.info{
+  font-size: 16px;
+}
+
+.o-detail-info{
+  color: #0d0d0d;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+hr{
+  background: #7d7d7d;
+}
+
+h6{
+  margin: 15px;
+}
+
+
+.icon{
+  font-size: 24px;
+  vertical-align: middle;
+  margin-right: 10px;
+  color: black;
+}
+
+.info > div {
+  margin-top: 10px;
+}

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Payment Method</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="container">
+  <mat-card class="payout-card mat-elevation-z3">
+    <form [formGroup]="payment">
+      <mat-form-field>
+        <mat-label>Account Holder Name</mat-label>
+        <input formControlName="name" matInput type="text">
+      </mat-form-field>
+
+<!--      <mat-form-field appearance="fill">-->
+<!--        <mat-label>Cars</mat-label>-->
+<!--        <select matNativeControl required>-->
+<!--          <option value="volvo">Volvo</option>-->
+<!--          <option value="saab">Saab</option>-->
+<!--          <option value="mercedes">Mercedes</option>-->
+<!--          <option value="audi">Audi</option>-->
+<!--        </select>-->
+<!--      </mat-form-field>-->
+
+      <mat-form-field>
+        <mat-label>Account No.</mat-label>
+        <input formControlName="account" matInput type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Swift/BIC</mat-label>
+        <input formControlName="swift" matInput type="text">
+      </mat-form-field>
+
+    </form>
+  </mat-card>
+
+  <button class="save-btn" mat-button (click)="exist ? updatePayoutMethod() : postPayoutMethod()">Save</button>
+</div>
+</ion-content>

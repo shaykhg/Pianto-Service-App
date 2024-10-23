@@ -1,0 +1,280 @@
+e<ion-header>
+    <ion-toolbar>
+        <ion-title>Dashboard</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <mat-tab-group>
+        <!--    Review Tab-->
+        <mat-tab label="Review">
+
+            <div>
+                <mat-card class="mat-elevation-z3 money-card">
+                    <h6>Average Rating</h6>
+                    <div>
+                        <ion-icon name="star" *ngFor="let i of reviewArray(avgReview).fill(1)"></ion-icon>
+
+                    </div>
+                </mat-card>
+            </div>
+
+            <div>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                           role="tab" aria-controls="nav-home" aria-selected="true" (click)="getWeeklyReviews()">Last 7
+                            Days</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                           role="tab" aria-controls="nav-profile" aria-selected="false" (click)="getMonthlyReviews()">Last
+                            30 Days</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+                           role="tab" aria-controls="nav-contact" aria-selected="false" (click)="getAnnualReviews()">Last
+                            365 Days</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+
+                    <div class="tab-pane fade show active expansion-tab-container" id="nav-home" role="tabpanel"
+                         aria-labelledby="nav-home-tab">
+
+                        <mat-card *ngFor="let review of weekReviews" (click)="openReviewBottomSheet(review)"
+                                  style="margin: 10px" class="mat-elevation-z2">
+                            <div class="details-container">
+                                <div>#{{review._id}}</div>
+                                <div>{{getHumanShortDate(review.date)}}</div>
+                                <div>{{util.getTime(review.date)}}</div>
+                            </div>
+                            <hr>
+
+                            <div class="rating-container">
+                                <span>{{review.name}}</span>
+                                <span>
+                  <ion-icon name="star" *ngFor="let i of reviewArray(review.rating).fill(1)"></ion-icon>
+
+                </span>
+                            </div>
+                        </mat-card>
+
+                        <mat-card *ngIf="weekReviews.length === 0" style="margin: 16px" class="mat-elevation-z2">
+
+                            <div>
+                                <h2 class="no-order-icon">
+                                    <ion-icon name="pricetag-outline"></ion-icon>
+                                </h2>
+                                <h5 class="no-order-text">No Reviews Found</h5></div>
+
+                        </mat-card>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <mat-card *ngFor="let review of monthReviews" (click)="openReviewBottomSheet(review)"
+                                  style="margin: 10px" class="mat-elevation-z2">
+                            <div class="details-container">
+                                <div>#{{review._id}}</div>
+                                <div>{{getHumanShortDate(review.date)}}</div>
+<!--                                <div>14:35</div>-->
+                            </div>
+                            <hr>
+
+                            <div class="rating-container">
+                                <span>{{review.name}}</span>
+                                <span>
+                        <ion-icon name="star" *ngFor="let i of reviewArray(review.rating).fill(1)"></ion-icon>
+
+
+                </span>
+                            </div>
+                        </mat-card>
+                        <mat-card *ngIf="monthReviews.length === 0" style="margin: 16px" class="mat-elevation-z2">
+
+                            <div>
+                                <h2 class="no-order-icon">
+                                    <ion-icon name="pricetag-outline"></ion-icon>
+                                </h2>
+                                <h5 class="no-order-text">No Reviews Found</h5></div>
+
+                        </mat-card>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+                        <mat-card *ngFor="let review of yearReviews" (click)="openReviewBottomSheet(review)"
+                                  style="margin: 10px" class="mat-elevation-z2">
+                            <div class="details-container">
+                                <div>#{{review._id}}</div>
+                                <div>{{getHumanShortDate(review.date)}}</div>
+<!--                                <div>14:35</div>-->
+                            </div>
+                            <hr>
+
+                            <div class="rating-container">
+                                <span>{{review.name}}</span>
+                                <span>
+                  <ion-icon name="star" *ngFor="let i of reviewArray(review.rating).fill(1)"></ion-icon>
+
+                </span>
+                            </div>
+                        </mat-card>
+                        <mat-card *ngIf="yearReviews.length === 0" style="margin: 16px" class="mat-elevation-z2">
+
+                            <div>
+                                <h2 class="no-order-icon">
+                                    <ion-icon name="pricetag-outline"></ion-icon>
+                                </h2>
+                                <h5 class="no-order-text">No Reviews Found</h5></div>
+
+                        </mat-card>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </mat-tab>
+        <!--    Earning Tab-->
+        <mat-tab label="Payment">
+            <div>
+                <mat-card class="mat-elevation-z3 money-card">
+                    <h6>Total</h6>
+                    <h3>{{getTotalEarning(typeOfEarning)}}&euro;</h3>
+                </mat-card>
+            </div>
+
+            <div>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                           role="tab" aria-controls="nav-home" aria-selected="true" (click)="typeOfEarning = 1">Last 7
+                            Days</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                           role="tab" aria-controls="nav-profile" aria-selected="false" (click)="typeOfEarning = 2">Last
+                            30 Days</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+                           role="tab" aria-controls="nav-contact" aria-selected="false" (click)="typeOfEarning = 3">Last
+                            365 Days</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+
+                    <!--          Last week-->
+
+                    <div class="tab-pane fade show active expansion-tab-container" id="nav-home" role="tabpanel"
+                         aria-labelledby="nav-home-tab">
+
+                        <mat-card *ngFor="let order of weekOrders" style="padding: 10px" class="mat-elevation-z2"
+                                  (click)="openEarningBottomSheet(order)">
+                            <div class="details-container">
+                                <div>#{{order._id}}</div>
+                                <div>{{getHumanShortDate(order.date)}}</div>
+                            </div>
+                            <div class="text-right">
+                                <div>{{util.getTime(order.date)}}</div>
+                            </div>
+                            <hr>
+
+                            <div class="rating-container">
+                                <span>{{order.name}}</span>
+                                <span>
+                                   {{((order.total + order.discount) * earningPercentage).toFixed(2)}}&euro;
+
+
+                </span>
+                            </div>
+                        </mat-card>
+
+                        <mat-card *ngIf="weekOrders.length === 0" style="margin: 16px" class="mat-elevation-z2">
+
+                            <div>
+                                <h2 class="no-order-icon">
+                                    <ion-icon name="cube-outline"></ion-icon>
+                                </h2>
+                                <h5 class="no-order-text">No Orders Found</h5></div>
+
+                        </mat-card>
+
+                    </div>
+
+                    <!--          Last Month-->
+
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                        <mat-card *ngFor="let order of monthOrders" style="margin: 10px" class="mat-elevation-z2"
+                                  (click)="openEarningBottomSheet(order)">
+                            <div class="details-container">
+                                <div>#{{order._id}}</div>
+                                <div>{{getHumanShortDate(order.date)}}</div>
+                            </div>
+                            <div class="text-right">
+                                <div>{{util.getTime(order.date)}}</div>
+
+                            </div>
+                            <hr>
+
+                            <div class="rating-container">
+                                <span>{{order.name}}</span>
+                                <span>
+                                   {{((order.total + order.discount) * earningPercentage).toFixed(2)}}&euro;
+
+
+                </span>
+                            </div>
+                        </mat-card>
+
+                        <mat-card *ngIf="monthOrders.length === 0" style="margin: 16px" class="mat-elevation-z2">
+
+                            <div>
+                                <h2 class="no-order-icon">
+                                    <ion-icon name="cube-outline"></ion-icon>
+                                </h2>
+                                <h5 class="no-order-text">No Orders Found</h5></div>
+
+                        </mat-card>
+
+                    </div>
+
+                    <!--          Last Year-->
+
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <mat-card *ngFor="let order of yearOrders" (click)="openEarningBottomSheet(order)"
+                                  style="margin: 10px" class="mat-elevation-z2">
+                            <div class="details-container">
+                                <div>#{{order._id}}</div>
+                                <span>{{getHumanShortDate(order.date)}}</span>
+
+                            </div>
+                            <div class="text-right">
+                                <span class="m-l-5 m-r-5">{{util.getTime(order.date)}}</span>
+                            </div>
+                            <hr>
+
+                            <div class="rating-container">
+                                <span>{{order.name}}</span>
+                                <span>
+                                   {{((order.total + order.discount) * earningPercentage).toFixed(2)}}&euro;
+
+
+                </span>
+                            </div>
+                        </mat-card>
+
+                        <mat-card *ngIf="yearOrders.length === 0" style="margin: 10px" class="mat-elevation-z2">
+                            <div>
+                                <div class="no-order-icon">
+                                    <ion-icon name="cube-outline"></ion-icon>
+                                </div>
+                                <h5 class="no-order-text">No Orders Found</h5>
+                            </div>
+                        </mat-card>
+
+
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</ion-content>

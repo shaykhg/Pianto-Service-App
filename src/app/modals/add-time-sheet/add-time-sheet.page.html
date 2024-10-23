@@ -1,0 +1,30 @@
+<div class="container">
+  <h5>Add time</h5>
+  <hr>
+  <div class="my-2"><span class="mdi mdi-clock-in"></span>Date: {{util.getHumanShortDate(data.date)}}</div>
+<div>
+  <form [formGroup]=scheduleForm>
+
+<!--      <div>-->
+<!--          <ion-item>-->
+<!--              <ion-label>HH:mm</ion-label>-->
+<!--              <ion-datetime displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>-->
+<!--          </ion-item>-->
+
+<!--      </div>-->
+
+    <div>
+      <span>From: </span><ngx-timepicker-field formControlName="from"  [format]="24"  [controlOnly]="true"></ngx-timepicker-field>
+    </div>
+
+    <div  class="my-4">
+      <span>Till : </span>&nbsp;
+      <ngx-timepicker-field formControlName="till" [(ngModel)]="tillTime" [format]="24"  [controlOnly]="true"></ngx-timepicker-field>
+    </div>
+
+    <div><button (click)="markAvailable()" class="save" mat-flat-button>Save</button></div>
+
+  </form>
+
+</div>
+</div>

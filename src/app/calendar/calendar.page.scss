@@ -1,0 +1,187 @@
+.months{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+.month{
+  background:  teal;
+  padding: 10px;
+  color: white;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(7, 14%);
+  justify-content: center;
+
+}
+
+
+
+.grid-time{
+  display: grid;
+  grid-template-columns: repeat(2, 40%);
+  justify-content: center;
+
+}
+
+.grid-column{
+  text-align: center;
+  padding: 5px;
+  font-size: 16px;
+  position: relative;
+  margin: 2px;
+  width: 36px;
+  height: 36px;
+  line-height: 1.5;
+
+}
+
+.column-time{
+  font-size: 16px;
+  position: relative;
+  margin: 5px;
+}
+
+
+.grid-column-selected{
+  text-align: center;
+  padding: 5px;
+  font-size: 16px;
+  border: 2px solid blueviolet;
+  color: white;
+  border-radius: 50%;
+  background: blueviolet;
+  position: relative;
+  margin: 2px;
+  width: 36px;
+  height: 36px;
+  line-height: 1.5;
+
+}
+
+.slot-selected-day{
+  text-align: center;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid blueviolet;
+  color: blueviolet;
+  border-radius: 50%;
+  background: white;
+  position: relative;
+  margin: 2px;
+  width: 36px;
+  height: 36px;
+  line-height: 1.5;
+
+}
+
+
+.chev{
+  height: 100%;
+  vertical-align: middle;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+hr{
+  background: #c4c4c4;
+}
+
+.btn-avail{
+  color: white;
+  padding: 1px 15px;
+  background: blueviolet;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.time-info{
+  font-size: 16px;
+  color: #7d7d7d;
+  margin: 5px 0;
+}
+
+.passed {
+  color: #9d9d9d;
+}
+
+.btn-cancel{
+  border: 1px solid orangered;
+  color: orangered;
+  font-size: 12px;
+}
+
+
+.mat-card{
+  border-radius: 12px;
+
+}
+
+.add-btn{
+  background: blueviolet;
+  color: white;
+  font-weight: bolder;
+  font-size: 16px;
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+  z-index: 99;
+}
+
+button:focus{
+  outline: none;
+}
+
+.details{
+  background: teal;
+  color: white;
+}
+
+.m-container {
+  display: flex;
+  align-items: center;
+}
+.container-content {
+  //height: 40px;
+  border: none;
+  margin-left: 3px;
+  margin-right: 3px;
+  //display: flex;
+  align-items: center;
+  width:100%;
+}
+.container-content span {
+  margin-left: 5px;
+}
+
+.ion-icon{
+  line-height:unset !important;
+}
+
+.city-chip{
+  border: 1px solid #8a2be2;
+  color: #8a2be2;
+  border-radius: 18px;
+  margin: 5px;
+  padding: 5px 16px;
+}
+
+.save-area{
+  color: #8a2be2;
+  border: 1px solid #8a2be2;
+  border-radius: 16px;
+  padding: 2px 0;
+}
+
+.save-area:disabled{
+  border: none;
+  border-radius: 16px;
+  padding: 2px 0;
+}
+
+
+.delete-area{
+  color: orangered;
+  border: 1px solid orangered;
+}

@@ -1,0 +1,21 @@
+{
+  "appId": "io.pianto.service",
+  "appName": "Pianto Service",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "allowMixedContent": true,
+  "linuxAndroidStudioPath" : "/snap/android-studio/current/android-studio/bin/studio.sh",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  },
+  "server": {
+    "allowNavigation": []
+  },
+  "cordova": {}
+}

@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="container">
+  <mat-card class="profile-head mat-elevation-z5">
+    <span class="profile-pic">
+      <ion-icon name="person-circle"></ion-icon>
+    </span>
+    <span class="user-name" *ngIf="session.getUser()">{{session.getUser().name}}</span>
+
+  </mat-card>
+
+  <mat-card class="profile-info mat-elevation-z3">
+    <div  routerLink="/personal-info"  matRipple>
+      Personal Information
+      <ion-icon name="person-outline"></ion-icon>
+    </div>
+    <hr>
+<!--    <div  routerLink="/order-history"  matRipple>-->
+<!--      Order History-->
+<!--      <ion-icon name="cube-outline"></ion-icon>-->
+<!--    </div>-->
+    <hr>
+    <div routerLink="/payout-method" matRipple>
+      Payout Method
+      <ion-icon name="wallet-outline"></ion-icon>
+    </div>
+    <hr>
+    <div routerLink="/terms" matRipple>
+      Terms of services
+      <ion-icon name="document-lock-outline"></ion-icon>
+    </div>
+    <hr>
+    <div routerLink="/about" matRipple>
+      Contact us
+      <ion-icon name="information-circle-outline"></ion-icon>
+    </div>
+    <hr>
+    <div matRipple (click)="session.logout()">
+      Logout
+      <ion-icon name="log-out-outline"></ion-icon>
+    </div>
+  </mat-card>
+</div>
+</ion-content>

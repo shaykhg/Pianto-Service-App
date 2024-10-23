@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container" *ngIf="!util.loading">
+    <form (ngSubmit)="login()" [formGroup]="loginForm">
+    <mat-card class="mat-elevation-z3 login-card">
+      <h3 class="text-center">Pianto</h3>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input type="email" formControlName="email" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" type="password" email="password" matInput>
+        </mat-form-field>
+
+    </mat-card>
+
+    <button mat-button class="save-btn" type="submit">Login</button>
+
+    </form>
+
+    <p class="cp-text">
+      © Copyright 2020 Pianto. All rights reserved.
+    </p>
+
+  </div>
+
+  <div *ngIf="util.loading" class="loading">
+    <img src="assets/icon/icon.png" width="64" height="64">
+    <h5 class="m-t-30">Loading...</h5>
+  </div>
+
+</ion-content>
+
+

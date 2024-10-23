@@ -1,0 +1,138 @@
+
+<div *ngIf="orderData" class="container p-b-10">
+
+  <h5 class="text-center">Order Details</h5>
+
+  <div>
+    <div class="o-detail-title">
+      <div>#{{orderData._id}}</div>
+      <span [style.color]="getStatusColor(orderData.status)" class="status">  ({{getStatus(orderData.status)}})</span>
+
+      <div>
+        <span>Date: {{util.getHumanShortDate(orderData.date)}}</span>
+        <br>
+        <span>Time: {{orderData.time}}</span>
+      </div>
+    </div>
+
+    <hr>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Customer Name</mat-label>
+      <input matInput [value]="orderData.name" readonly>
+      <mat-icon matPrefix class="m-r-4">person</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Customer Email</mat-label>
+      <input matInput [value]="orderData.email" readonly>
+      <mat-icon matPrefix class="m-r-4">mail</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Customer Address</mat-label>
+      <input matInput [value]="orderData.address" readonly>
+      <mat-icon matPrefix class="m-r-4">home</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>City</mat-label>
+      <input matInput [value]="orderData.city" readonly>
+      <mat-icon matPrefix class="m-r-4">location_city</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Postcode</mat-label>
+      <input matInput [value]="orderData.postcode" readonly>
+      <mat-icon matPrefix class="m-r-4">map</mat-icon>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Contact Number</mat-label>
+      <input matInput [value]="orderData.phone" readonly>
+      <mat-icon matPrefix  class="m-r-4">phone</mat-icon>
+    </mat-form-field>
+  </div>
+
+
+  <div>
+    <h5 class="text-center">Piano Details</h5>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Piano Name</mat-label>
+      <input matInput [value]="orderData.pianoName" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Serial number</mat-label>
+      <input matInput [value]="orderData.serial? orderData.serial : 'Not added'" readonly>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Piano Type</mat-label>
+      <input matInput [value]="orderData.type" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Last Service</mat-label>
+      <input matInput [value]="orderData.lastService" readonly>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Notes</mat-label>
+      <input matInput [value]="orderData.notes ?  orderData.notes : 'No notes added'" readonly>
+    </mat-form-field>
+
+
+  </div>
+  <div >
+    <h5 class="text-center">Services Ordered</h5>
+    <ul>
+      <li *ngFor="let service of orderData.service">{{service.name}}</li>
+    </ul>
+  </div>
+
+  <div class="fs-16" *ngIf="orderData.extended">
+    <h5 class="m-t-30">Edited Order Details</h5>
+    <hr>
+
+    <div class="p-details">
+      <div class="p-detail-title"> Booking Id</div>
+      <div class="p-detail-info">{{orderData._id}}</div>
+    </div>
+
+    <div class="p-details">
+      <div class="p-detail-title">Status</div>
+      <div class="p-detail-info">{{orderData.additional.status}}</div>
+    </div>
+
+
+    <div class="p-details">
+      <div class="p-detail-title">Total</div>
+      <div class="p-detail-info">{{orderData.additional.total}}</div>
+    </div>
+
+
+    <h6 class="m-t-20">New Services</h6>
+    <ul>
+      <li *ngFor="let service of orderData.additional.services">{{service.name}}</li>
+    </ul>
+  </div>
+
+
+  <!--  <div *ngIf="orderData.status === 'PAYMENT_CONFIRMED'" class="d-flex justify-content-around">-->
+  <!--    <hr>-->
+
+  <!--    <button (click)="changeStatus(1)" class="cancel-btn" mat-flat-button>Reject</button>-->
+  <!--    <button (click)="changeStatus(2)" class="comp-btn"  mat-flat-button  >Confirm</button>-->
+  <!--  </div>-->
+
+  <!--  <div *ngIf="orderData.status === 'COMPLETE' || orderData.status === 'BOOKING_CONFIRMED' || orderData.status === 'CANCELLED'" class="d-flex justify-content-around">-->
+
+
+
+</div>

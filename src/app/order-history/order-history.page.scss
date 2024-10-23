@@ -1,0 +1,42 @@
+.details-container{
+  display: flex;
+  flex-direction: row;     /* make main axis horizontal (default setting) */
+  justify-content: space-between; /* center items horizontally, in this case */
+  align-items: center;     /* center items vertically, in this case */
+}
+
+hr{
+  background-color: #dbdbdb;
+}
+
+.rating-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.no-order-icon{
+  text-align: center;
+  font-size: 60px;
+  color: #767676;
+}
+.no-order-text{
+  text-align: center;
+  font-size: 18px;
+  color: #767676;
+}
+
+.mat-card{
+  border-radius: 12px;
+
+}
+
+.no-order{
+  text-align: center;
+  color: #7d7d7d;
+}
+
+.empty-icon{
+  color: #7d7d7d;
+  text-align: center;
+  font-size: 48px;
+}

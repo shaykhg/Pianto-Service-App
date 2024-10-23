@@ -1,0 +1,69 @@
+
+  <div *ngIf="orderData" class="container">
+
+    <h6 class="text-center">Order Details</h6>
+
+    <div>
+      <div class="o-detail-title d-flex justify-content-between">
+        <span>#{{orderData._id}}</span>
+        <span>
+          <span>{{util.getHumanShortDate(orderData.date)}}</span>
+          <br>
+          <span>{{orderData.time}}</span>
+        </span>
+      </div>
+
+      <hr>
+
+      <div style="margin-top: 5px" class="o-detail-title">
+        <span class="icon">
+          <ion-icon name="home"></ion-icon>
+        </span>
+        <span>Address</span>
+      </div>
+
+      <div class="o-detail-info">{{orderData.address}}</div>
+
+      <div style="margin-top: 5px" class="o-detail-title">
+        <span class="icon">
+          <ion-icon name="call"></ion-icon>
+        </span>
+        <span>Contact number</span>
+      </div>
+      <div class="o-detail-info">{{orderData.phone}}</div>
+    </div>
+
+
+    <div>
+      <h6 class="text-center">Piano Details</h6>
+
+      <div class="p-details">
+        <div class="p-detail-title">Piano name</div>
+        <div class="p-detail-info">{{orderData.name}}</div>
+      </div>
+
+      <div class="p-details">
+        <div class="p-detail-title">Serial number</div>
+        <div class="p-detail-info">{{orderData.serial? orderData.serial : 'Not added'}}</div>
+      </div>
+      <div class="p-details">
+        <div class="p-detail-title">Piano type</div>
+        <div class="p-detail-info">{{orderData.type}}</div>
+      </div>
+      <div class="p-details">
+        <div class="p-detail-title">Last Service</div>
+        <div class="p-detail-info">{{orderData.lastService}}</div>
+      </div>
+
+
+    </div>
+    <div >
+      <h6 class="text-center">Services Ordered</h6>
+      <ul>
+        <li *ngFor="let service of orderData.service">{{service.name}}</li>
+      </ul>
+    </div>
+    <div>
+
+    </div>
+  </div>

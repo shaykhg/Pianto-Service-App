@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Complete Order</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="container my-3">
+
+        <mat-card class="mat-elevation-z2">
+
+            <div *ngFor="let ques of answers">
+                <div>Q : {{ques.question}}</div>
+                <mat-form-field>
+                    <mat-label>Answer</mat-label>
+                    <label>
+                        <input matInput minlength="1" type="text" [(ngModel)]="ques.answer">
+                    </label>
+                    <mat-error>Please enter an answer</mat-error>
+
+                </mat-form-field>
+
+            </div>
+
+            <div class="d-flex justify-content-around">
+                <button class="cncl-btn" mat-flat-button routerLink="/tab/tabs/home">Cancel</button>
+                <button (click)="submit()" class="sbmt-btn" mat-raised-button>Submit</button>
+            </div>
+
+        </mat-card>
+
+    </div>
+
+</ion-content>

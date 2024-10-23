@@ -1,0 +1,51 @@
+.money-card{
+  text-align: center;
+  margin: 20px;
+}
+
+.nav-tabs .nav-item {
+  margin-bottom: -1px;
+  min-width: 33.33%;
+}
+
+.expansion-tab-container{
+  padding: 10px;
+}
+
+.details-container{
+  display: flex;
+  flex-direction: row;     /* make main axis horizontal (default setting) */
+  justify-content: space-between; /* center items horizontally, in this case */
+  align-items: center;     /* center items vertically, in this case */
+}
+
+hr{
+  background-color: #dbdbdb;
+}
+
+.rating-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.no-order-icon{
+  text-align: center;
+  font-size: 60px;
+  color: #767676;
+}
+.no-order-text{
+  text-align: center;
+  font-size: 18px;
+  color: #767676;
+}
+
+.mat-card{
+  border-radius: 12px;
+
+}
+
+.nav-link {
+  display: block;
+  padding: 5px 0;
+  text-align: center;
+}

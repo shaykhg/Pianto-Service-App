@@ -1,0 +1,7 @@
+{
+  "name": "pianto-rider",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
